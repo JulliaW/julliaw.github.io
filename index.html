@@ -296,6 +296,129 @@
             background-color: #e50914;
         }
 
+        .admin-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .admin-login:hover {
+            transform: scale(1.1);
+        }
+
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .admin-form {
+            background-color: #111;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .portfolio-manager {
+            background-color: #111;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 100%;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .portfolio-upload {
+            margin-bottom: 30px;
+        }
+
+        .portfolio-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .portfolio-manager-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .portfolio-manager-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .item-actions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .edit-item,
+        .delete-item {
+            color: #fff;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .edit-item:hover,
+        .delete-item:hover {
+            color: #e50914;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.2);
+            border: 1px solid #28a745;
+            color: #28a745;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 36px;
@@ -341,49 +464,8 @@
     <section id="portfolio" class="section">
         <div class="container">
             <h2 class="section-title">Meu Portfólio</h2>
-            <div class="portfolio">
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto de curta-metragem" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Além do Horizonte</h3>
-                        <p>Curta-metragem premiado</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto de vídeo corporativo" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Visão Nova</h3>
-                        <p>Campanha corporativa</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto de documentário" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Rastros Urbanos</h3>
-                        <p>Documentário</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto de videoclipe" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Ecos da Cidade</h3>
-                        <p>Videoclipe musical</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto publicitário" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Essência</h3>
-                        <p>Comercial publicitário</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projeto de filme institucional" class="portfolio-img">
-                    <div class="portfolio-overlay">
-                        <h3>Inovação Contínua</h3>
-                        <p>Filme institucional</p>
-                    </div>
-                </div>
+            <div class="portfolio" id="portfolio-container">
+                <!-- Os itens do portfólio serão carregados dinamicamente aqui -->
             </div>
         </div>
     </section>
@@ -434,9 +516,9 @@
                 </div>
                 <div class="about-content">
                     <h2>Sobre Mim</h2>
-                    <p>Olá, sou Paulo Oliveira, filmmaker com mais de 10 anos de experiência na indústria audiovisual. Minha paixão pelo cinema e pela narrativa visual me levou a trabalhar em diversos
+                    <p>Olá, sou Paulo Mendes, filmmaker com mais de 10 anos de experiência na indústria audiovisual. Minha paixão pelo cinema e pela narrativa visual me levou a trabalhar em diversos
                         projetos, desde curtas-metragens premiados até campanhas publicitárias de grande impacto.</p>
-                    <p>Formado em publicidade e propaganda, aprimorei minhas habilidades trabalhando com produtoras renomadas no Brasil e no exterior. Minha abordagem combina técnica
+                    <p>Formado em Cinema pela Universidade de São Paulo, aprimorei minhas habilidades trabalhando com produtoras renomadas no Brasil e no exterior. Minha abordagem combina técnica
                         apurada com sensibilidade artística, buscando sempre contar histórias que conectem e emocionem.</p>
                     <p>Acredito no poder da imagem como forma de expressão e comunicação. Cada projeto é uma oportunidade de criar algo único e memorável, que transmita exatamente a mensagem desejada
                         com a estética ideal.</p>
@@ -466,18 +548,19 @@
                 </div>
             </div>
             <div class="contact-form">
-                <form>
+                <div id="contact-status"></div>
+                <form id="contactForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Seu nome">
+                        <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Seu email">
+                        <input type="email" class="form-control" id="email" placeholder="Seu email" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Assunto">
+                        <input type="text" class="form-control" id="subject" placeholder="Assunto" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Sua mensagem"></textarea>
+                        <textarea class="form-control" id="message" placeholder="Sua mensagem" required></textarea>
                     </div>
                     <button type="submit" class="btn">Enviar Mensagem</button>
                 </form>
@@ -493,9 +576,506 @@
                 <a href="#" class="social-link">YT</a>
                 <a href="#" class="social-link">VM</a>
             </div>
-            <p>&copy; 2025 CinemaVision. Todos os direitos reservados.</p>
+            <p>&copy; 2025 FaíscaFilmes. Todos os direitos reservados.</p>
         </div>
     </footer>
-</body>
 
-</html>
+    <!-- Admin Area -->
+    <div class="admin-login" id="adminLoginBtn">👤</div>
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-close" id="adminClose">✕</div>
+
+        <div class="admin-form" id="loginForm">
+            <h2 style="text-align: center; margin-bottom: 20px;">Login Administrativo</h2>
+            <div id="login-status"></div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="adminUsername" placeholder="Usuário">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="adminPassword" placeholder="Senha">
+            </div>
+            <button type="button" class="btn" id="loginBtn" style="width: 100%;">Entrar</button>
+        </div>
+
+        <div class="portfolio-manager" id="portfolioManager">
+            <h2 style="text-align: center; margin-bottom: 20px;">Gerenciar Portfólio</h2>
+
+            <div class="portfolio-upload">
+                <h3>Adicionar Novo Projeto</h3>
+                <div id="upload-status"></div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="projectTitle" placeholder="Título do Projeto">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="projectDescription" placeholder="Descrição do Projeto">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="projectImage" accept="image/*">
+                </div>
+                <button type="button" class="btn" id="uploadBtn">Adicionar Projeto</button>
+            </div>
+
+            <h3>Projetos Existentes</h3>
+            <div class="portfolio-items" id="adminPortfolioItems">
+                <!-- Os itens do portfólio serão carregados dinamicamente aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Dados de amostra para o portfólio (simulando um banco de dados)
+        let portfolioData = [{
+                id: 1,
+                title: "Além do Horizonte",
+                description: "Curta-metragem premiado",
+                image: "/api/placeholder/600/400"
+            },
+            {
+                id: 2,
+                title: "Visão Nova",
+                description: "Campanha corporativa",
+                image: "/api/placeholder/600/400"
+            },
+            {
+                id: 3,
+                title: "Rastros Urbanos",
+                description: "Documentário",
+                image: "/api/placeholder/600/400"
+            },
+            {
+                id: 4,
+                title: "Ecos da Cidade",
+                description: "Videoclipe musical",
+                image: "/api/placeholder/600/400"
+            },
+            {
+                id: 5,
+                title: "Essência",
+                description: "Comercial publicitário",
+                image: "/api/placeholder/600/400"
+            },
+            {
+                id: 6,
+                title: "Inovação Contínua",
+                description: "Filme institucional",
+                image: "/api/placeholder/600/400"
+            }
+        ];
+
+        // Credenciais de login (em um sistema real, isso estaria no servidor)
+        const adminCredentials = {
+            username: "paulo",
+            password: "paulo123"
+        };
+
+        // Elementos do DOM
+        const adminLoginBtn = document.getElementById('adminLoginBtn');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminClose = document.getElementById('adminClose');
+        const loginForm = document.getElementById('loginForm');
+        const portfolioManager = document.getElementById('portfolioManager');
+        const loginBtn = document.getElementById('loginBtn');
+        const adminUsername = document.getElementById('adminUsername');
+        const adminPassword = document.getElementById('adminPassword');
+        const loginStatus = document.getElementById('login-status');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const projectTitle = document.getElementById('projectTitle');
+        const projectDescription = document.getElementById('projectDescription');
+        const projectImage = document.getElementById('projectImage');
+        const uploadStatus = document.getElementById('upload-status');
+        const adminPortfolioItems = document.getElementById('adminPortfolioItems');
+        const portfolioContainer = document.getElementById('portfolio-container');
+        const contactForm = document.getElementById('contactForm');
+        const contactStatus = document.getElementById('contact-status');
+
+        // Carregar itens do portfólio na página inicial
+        function loadPortfolio() {
+            portfolioContainer.innerHTML = '';
+
+            portfolioData.forEach(item => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-item';
+                portfolioItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>${item.title}</h3>
+                        <p>${item.description}</p>
+                    </div>
+                `;
+                portfolioContainer.appendChild(portfolioItem);
+            });
+        }
+
+        // Carregar itens do portfólio no painel de administração
+        function loadAdminPortfolio() {
+            adminPortfolioItems.innerHTML = '';
+
+            portfolioData.forEach(item => {
+                const portfolioItem = document.createElement('div');
+                portfolioItem.className = 'portfolio-manager-item';
+                portfolioItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}">
+                    <div class="item-actions">
+                        <span class="edit-item" data-id="${item.id}">✏️</span>
+                        <span class="delete-item" data-id="${item.id}">🗑️</span>
+                    </div>
+                `;
+                adminPortfolioItems.appendChild(portfolioItem);
+            });
+
+            // Adicionar event listeners para as ações de editar e excluir
+            document.querySelectorAll('.delete-item').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    deletePortfolioItem(itemId);
+                });
+            });
+
+            document.querySelectorAll('.edit-item').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const itemId = parseInt(this.getAttribute('data-id'));
+                    editPortfolioItem(itemId);
+                });
+            });
+        }
+
+        // Função para excluir um item do portfólio
+        function deletePortfolioItem(id) {
+            // Confirmar antes de excluir
+            if (confirm('Tem certeza que deseja excluir este item?')) {
+                // Encontrar o índice do item no array
+                const index = portfolioData.findIndex(item => item.id === id);
+                if (index !== -1) {
+                    // Remover o item do array
+                    portfolioData.splice(index, 1);
+
+                    // Atualizar a exibição do portfólio
+                    loadAdminPortfolio();
+                    loadPortfolio();
+
+                    // Exibir mensagem de sucesso
+                    showAlert(uploadStatus, 'Item excluído com sucesso!', 'success');
+                }
+            }
+        }
+
+        // Função para editar um item do portfólio
+        function editPortfolioItem(id) {
+            // Encontrar o item no array
+            const item = portfolioData.find(item => item.id === id);
+            if (item) {
+                // Preencher os campos com os dados do item
+                projectTitle.value = item.title;
+                projectDescription.value = item.description;
+
+                // Alterar o botão de upload para edição
+                uploadBtn.textContent = 'Atualizar Projeto';
+                uploadBtn.setAttribute('data-edit-id', id);
+
+                // Rolar até o topo do formulário
+                portfolioManager.scrollTop = 0;
+            }
+        }
+
+        // Função para mostrar alertas
+        function showAlert(element, message, type) {
+            element.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+
+            // Remover o alerta após 5 segundos
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            // Carregar o portfólio inicial
+            loadPortfolio();
+
+            // Abrir o painel de administração
+            adminLoginBtn.addEventListener('click', function () {
+                adminPanel.style.display = 'flex';
+            });
+
+            // Fechar o painel de administração
+            adminClose.addEventListener('click', function () {
+                adminPanel.style.display = 'none';
+                // Redefinir o formulário de login
+                loginForm.reset();
+                loginStatus.innerHTML = '';
+            });
+
+            // Processar o login
+            loginBtn.addEventListener('click', function () {
+                const username = adminUsername.value.trim();
+                const password = adminPassword.value.trim();
+
+                if (username === adminCredentials.username && password === adminCredentials.password) {
+                    // Login bem-sucedido
+                    loginForm.style.display = 'none';
+                    portfolioManager.style.display = 'block';
+
+                    // Carregar os itens do portfólio no painel de administração
+                    loadAdminPortfolio();
+                } else {
+                    // Login falhou
+                    showAlert(loginStatus, 'Usuário ou senha incorretos!', 'danger');
+                }
+            });
+
+            // Processar o upload de novo projeto ou edição
+            uploadBtn.addEventListener('click', function () {
+                const title = projectTitle.value.trim();
+                const description = projectDescription.value.trim();
+                const fileInput = projectImage.files[0];
+
+                if (title === '' || description === '') {
+                    showAlert(uploadStatus, 'Por favor, preencha todos os campos!', 'danger');
+                    return;
+                }
+
+                // Verificar se é uma edição ou um novo item
+                const editId = parseInt(uploadBtn.getAttribute('data-edit-id'));
+
+                if (editId) {
+                    // É uma edição
+                    const index = portfolioData.findIndex(item => item.id === editId);
+                    if (index !== -1) {
+                        // Atualizar os dados do item
+                        portfolioData[index].title = title;
+                        portfolioData[index].description = description;
+
+                        // Se uma nova imagem foi selecionada
+                        if (fileInput) {
+                            // Em um sistema real, faríamos o upload da imagem para o servidor
+                            // Aqui estamos apenas simulando isso
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                portfolioData[index].image = e.target.result;
+
+                                // Atualizar a exibição do portfólio
+                                loadAdminPortfolio();
+                                loadPortfolio();
+                            };
+                            reader.readAsDataURL(fileInput);
+                        } else {
+                            // Atualizar a exibição do portfólio
+                            loadAdminPortfolio();
+                            loadPortfolio();
+                        }
+
+                        // Redefinir o formulário
+                        projectTitle.value = '';
+                        projectDescription.value = '';
+                        projectImage.value = '';
+                        uploadBtn.textContent = 'Adicionar Projeto';
+                        uploadBtn.removeAttribute('data-edit-id');
+
+                        // Exibir mensagem de sucesso
+                        showAlert(uploadStatus, 'Projeto atualizado com sucesso!', 'success');
+                    }
+                } else {
+                    // É um novo item
+                    if (!fileInput) {
+                        showAlert(uploadStatus, 'Por favor, selecione uma imagem!', 'danger');
+                        return;
+                    }
+
+                    // Em um sistema real, faríamos o
+                    // É um novo item
+                    if (!fileInput) {
+                        showAlert(uploadStatus, 'Por favor, selecione uma imagem!', 'danger');
+                        return;
+                    }
+
+                    // Em um sistema real, faríamos o upload da imagem para o servidor
+                    // Aqui estamos apenas simulando isso
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        // Criar um novo ID (encontrando o maior ID atual e adicionando 1)
+                        const newId = portfolioData.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+
+                        // Criar um novo item
+                        const newItem = {
+                            id: newId,
+                            title: title,
+                            description: description,
+                            image: e.target.result
+                        };
+
+                        // Adicionar o novo item ao array
+                        portfolioData.push(newItem);
+
+                        // Atualizar a exibição do portfólio
+                        loadAdminPortfolio();
+                        loadPortfolio();
+
+                        // Redefinir o formulário
+                        projectTitle.value = '';
+                        projectDescription.value = '';
+                        projectImage.value = '';
+
+                        // Exibir mensagem de sucesso
+                        showAlert(uploadStatus, 'Projeto adicionado com sucesso!', 'success');
+                    };
+                    reader.readAsDataURL(fileInput);
+                }
+            });
+
+            // Processar o envio do formulário de contato
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                // Validar os campos
+                if (name === '' || email === '' || subject === '' || message === '') {
+                    showAlert(contactStatus, 'Por favor, preencha todos os campos!', 'danger');
+                    return;
+                }
+
+                // Validar o formato do email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    showAlert(contactStatus, 'Por favor, insira um email válido!', 'danger');
+                    return;
+                }
+
+                // Em um sistema real, aqui enviaríamos o formulário para o servidor
+                // Simulação do envio de email
+
+                // Criar objeto com os dados do formulário
+                const formData = {
+                    name: name,
+                    email: email,
+                    subject: subject,
+                    message: message
+                };
+
+                // Simular uma requisição AJAX
+                setTimeout(() => {
+                    // Simular uma resposta bem-sucedida
+                    console.log('Dados do formulário enviados:', formData);
+
+                    // Mostrar mensagem de sucesso
+                    showAlert(contactStatus, 'Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+
+                    // Limpar o formulário
+                    contactForm.reset();
+                }, 1500);
+            });
+        });
+
+        // Simulação de um sistema de armazenamento de dados
+        // Em um sistema real, essas funções fariam requisições AJAX para o backend
+
+        // Função para salvar os dados no localStorage
+        function savePortfolioData() {
+            localStorage.setItem('portfolioData', JSON.stringify(portfolioData));
+        }
+
+        // Função para carregar os dados do localStorage
+        function loadPortfolioData() {
+            const savedData = localStorage.getItem('portfolioData');
+            if (savedData) {
+                portfolioData = JSON.parse(savedData);
+            }
+        }
+
+        // Carregar dados salvos quando a página for carregada
+        document.addEventListener('DOMContentLoaded', function () {
+            loadPortfolioData();
+            loadPortfolio();
+        });
+
+        // Salvar dados quando eles forem alterados
+        function updatePortfolioData() {
+            loadAdminPortfolio();
+            loadPortfolio();
+            savePortfolioData();
+        }
+    </script>
+
+    <!-- PHP para processar o formulário de contato em um ambiente de servidor real -->
+    <!--
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Coletar os dados do formulário
+        $name = $_POST["name"];
+        $email = $_POST["email"];
+        $subject = $_POST["subject"];
+        $message = $_POST["message"];
+        
+        // Email para onde a mensagem será enviada
+        $to = "contato@cinemavision.com.br";
+        
+        // Assunto do email
+        $email_subject = "Contato do site: $subject";
+        
+        // Corpo do email
+        $email_body = "Você recebeu uma nova mensagem do formulário de contato.\n\n";
+        $email_body .= "Nome: $name\n";
+        $email_body .= "Email: $email\n";
+        $email_body .= "Assunto: $subject\n";
+        $email_body .= "Mensagem:\n$message\n";
+        
+        // Cabeçalhos do email
+        $headers = "From: $email\n";
+        $headers .= "Reply-To: $email\n";
+        
+        // Enviar o email
+        if (mail($to, $email_subject, $email_body, $headers)) {
+            echo json_encode(["status" => "success", "message" => "Mensagem enviada com sucesso!"]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Erro ao enviar a mensagem. Por favor, tente novamente."]);
+        }
+        exit;
+    }
+    ?>
+    -->
+
+    <!-- PHP para processar o upload de imagens em um ambiente de servidor real -->
+    <!--
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["projectImage"])) {
+        $target_dir = "uploads/";
+        $target_file = $target_dir . basename($_FILES["projectImage"]["name"]);
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        
+        // Verificar se é uma imagem real
+        $check = getimagesize($_FILES["projectImage"]["tmp_name"]);
+        if ($check === false) {
+            echo json_encode(["status" => "error", "message" => "O arquivo não é uma imagem."]);
+            exit;
+        }
+        
+        // Verificar o tamanho do arquivo
+        if ($_FILES["projectImage"]["size"] > 5000000) { // 5MB
+            echo json_encode(["status" => "error", "message" => "O arquivo é muito grande. Tamanho máximo: 5MB."]);
+            exit;
+        }
+        
+        // Permitir apenas certos formatos de arquivo
+        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+            echo json_encode(["status" => "error", "message" => "Apenas JPG, JPEG, PNG e GIF são permitidos."]);
+            exit;
+        }
+        
+        // Gerar um nome único para o arquivo
+        $new_file_name = uniqid() . "." . $imageFileType;
+        $target_file = $target_dir . $new_file_name;
+        
+        // Tentar fazer o upload
+        if (move_uploaded_file($_FILES["projectImage"]["tmp_name"], $target_file)) {
+            echo json_encode(["status" => "success", "message" => "Imagem enviada com sucesso!", "file" => $target_file]);
+        } else {
+            echo json_encode(["status" => "error", "message" => "Erro ao enviar o arquivo."]);
+        }
+        exit;
+    }
+    ?>
+    -->
